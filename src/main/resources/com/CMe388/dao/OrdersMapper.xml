@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.CMe388.dao.OrdersMapper">
+
+    <select id="findOrderWithProductByUserId" parameterType="integer" resultMap="OrderAndProductResult">
+        select om.*, p.name, p.price, p.image
+        from orders o,
+             product p,
+             orderitem om
+        where o.id = om.orderId
+          and om.productId = p.id
+          and o.userId = ${userId}
+    </select>
+    <resultMap id="OrderAndProductResult" type="orders">
+        <id property="id" column="orderId"/>
+        <collection property="products" ofType="product">
+            <id property="id" column="productId"/>
+            <result property="name" column="name"/>
+            <result property="price" column="price"/>
+            <result property="image" column="image"/>
+        </collection>
+    </resultMap>
+    <insert id="addOrder" parameterType="orders" keyProperty="id" useGeneratedKeys="true">
+        insert into orders(id, userId)
+        values (#{id}, #{userId})
+    </insert>
+    <insert id="addOrderItem" parameterType="orders">
+        insert into orderitem(orderId,productId) values
+        <foreach collection="products" item="product" separator=",">
+            (#{id},#{product.id})
+        </foreach>
+    </insert>
+
+</mapper>

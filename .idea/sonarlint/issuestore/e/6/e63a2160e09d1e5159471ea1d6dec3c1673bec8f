@@ -1,0 +1,7 @@
+
+b
+java:S1192""MDefine a constant instead of duplicating this literal "/admin/login" 3 times.(õ§³
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(˜ø†ğÿÿÿÿÿ
+U
+java:S2441":Make "User" serializable or don't store it in the session.(ûÁâüÿÿÿÿ
+U	java:S1064"9Replace this use of System.out or System.err by a logger.(Ø¼¢ƒ8ºìÁ‚‘0
